@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     TController::Get()->camIndex = 0;
 //    TController::Get()->outUrl = "rtmp://127.0.0.1/live/home";ffmpeg -re -i v1080.mp4 -vcodec libx264 -acodec aac -f flv rtmp://192.168.31.93:1935/live/home
     TController::Get()->outUrl = "rtmp://192.168.31.93:1935/live/home";
-//    TController::Get()->outUrl = "rtmp://[2408:8456:647:1c01:9c3e:3a9b:c21e:e323]/live/home";
+
     TController::Get()->SetFilter("d", (ui->comboBox_2->currentIndex()+1)*3);//369
     TController::Get()->Start();
 
