@@ -11,10 +11,6 @@ public:
     int sampleByte = 2;
     int nbSamples = 1024;
 
-    /*--start: add by bo-signal*/
-    QMetaObject::Connection Tconnection;
-    /*--end : add by bo-signal*/
-
     virtual bool Init() = 0;
 
     virtual void Stop() = 0;

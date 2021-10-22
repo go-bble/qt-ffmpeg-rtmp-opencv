@@ -46,7 +46,7 @@ public:
                 if(len<0)return;
                 long long pts = getCurTime();
                 TData d(buffer.data(), l, pts);
-                cout << "CTAudioRecord->signal$slot" << endl;
+                cout <<"len"<<l <<buffer.data() << "OK"<<endl;
             });
         }
         else {
