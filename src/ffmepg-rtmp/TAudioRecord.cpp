@@ -12,48 +12,28 @@ public:
         cout << "CTAudioRecord->TDataThread.start" << endl;
         int readSize = nbSamples *channels *sampleByte;
         char *pcm = new char[readSize];
-//        while (!isExit)
-//        {
-//            if(input->bytesReady() <readSize)
-//            {
-//                QThread::msleep(1);
-//                continue;
-//            }
-
-//            int useSize = 0;
-//            while (useSize != readSize)
-//            {
-//                int len = io->read(pcm + useSize,readSize - useSize);
-//                if(len<0)break;
-//                useSize += len;
-//            }
-//            if(useSize != readSize)continue;
-//            long long pts = getCurTime();
-//            TData d(pcm, readSize, pts);
-//        }
-
-        //-------------------------signal$slot------------------------------
-        if(!isExit)
+        while (!isExit)
         {
-            Tconnection = connect(io,&QIODevice::readyRead,[=]()mutable{
-                qint64 len = input->bytesReady();
+            if(input->bytesReady() <readSize)
+            {
+                QThread::msleep(1);
+                continue;
+            }
 
-                if (len > readSize)
-                    len = readSize;
-
-                QByteArray buffer(len, 0);
-                qint64 l = io->read(buffer.data(), len);
-                if(len<0)return;
-                long long pts = getCurTime();
-                TData d(buffer.data(), l, pts);
-                cout <<"len"<<l <<buffer.data() << "OK"<<endl;
-            });
+            int useSize = 0;
+            while (useSize != readSize)
+            {
+                int len = io->read(pcm + useSize,readSize - useSize);
+                if(len<0)break;
+                useSize += len;
+            }
+            if(useSize != readSize)continue;
+            long long pts = getCurTime();
+            Push(TData(pcm, readSize, pts));
         }
-        else {
-            disconnect(Tconnection);
-            delete[] pcm;
-        }
 
+
+        delete[] pcm;
         cout << "CTAudioRecord->TDataThread.quit" << endl;
 
     }

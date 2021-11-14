@@ -32,7 +32,7 @@ void TController::run()
             {
                 if(TRtmp::Get()->sendFrame(pkt,aIndex))
                 {
-                    //std::cout << " -A ";
+                    std::cout << " -A ";
                 }
             }
         }

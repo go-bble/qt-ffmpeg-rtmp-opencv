@@ -25,16 +25,17 @@ public:
                 msleep(1);
                 continue;
             }
-            Tmutex.lock();
-            for(int i = 0; i < filterSize;i++)
-            {
-                Mat des;
-                filters[i]->Filter(&frame, &des);
-                frame = des;
-            }
-            Tmutex.unlock();
             imshow("v", frame);
             waitKey(1);
+//            Tmutex.lock();
+//            for(int i = 0; i < filterSize;i++)
+//            {
+//                Mat des;
+//                filters[i]->Filter(&frame, &des);
+//                frame = des;
+//            }
+//            Tmutex.unlock();
+
             TData d((char*)frame.data, frame.cols*frame.rows*frame.elemSize(),getCurTime());
             Push(d);
 
